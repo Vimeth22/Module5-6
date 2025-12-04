@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Module 5-6</title>
+    <style>
+        /* (same CSS as you had) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #eef1f5;
+            color: #1a1a1a;
+        }
+        .page-wrapper {
+            max-width: 1080px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #003366;
+        }
+        header h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #003366;
+        }
+        header h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #333;
+        }
+        header p {
+            margin: 0;
+            font-size: 1.0rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .video-panel {
+            flex: 1 1 700px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #c0c4c9;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+        }
+        .video-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003366;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 5px;
+        }
+        .video-panel p {
+            margin: 0 0 15px 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .display-area {
+            margin: 0 auto;
+            border-radius: 4px;
+            border: 2px solid #333;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .display-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .control-panel {
+            flex: 0 1 300px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #c0c4c9;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+        }
+        .control-panel h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003366;
+        }
+        .control-panel p {
+            margin: 0 0 20px 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn-group button {
+            background-color: #0056b3;
+            border: none;
+            color: #ffffff;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: left;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-group button:hover {
+            background-color: #003d82;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+        .btn-group button span.mode-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .btn-group button span.mode-desc {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #c9e6ff;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            padding: 15px 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+      <p>
+      Module 5-6:
+      <a href="https://drive.google.com/file/d/1T8RA5c8o2GTZuR_udYMWrthbTy1FZ5Pz/view?usp=sharing" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+        Click to Watch the Demo Video
+      </a>
+    </p>
+  </div>
+
+<div class="page-wrapper">
+
+    <header>
+        <h1>Module 5-6</h1>
+    </header>
+
+    <main class="content">
+        <section class="video-panel">
+            <h3>Processed Video Stream Analysis</h3>
+            <div class="display-area">
+                <img src="{{ url_for('video_feed') }}" alt="Real-Time Computer Vision Tracking Stream">
+            </div>
+        </section>
+
+        <aside class="control-panel">
+            <h3>Tracking Algorithm Selection</h3>
+            <p>Select a method below to dynamically instantiate and switch the underlying tracking algorithm for real-time performance assessment.</p>
+
+            <div class="btn-group">
+                <button type="button" onclick="changeMode('marker', this)">
+                    <span class="mode-label">Algorithm 1: ArUco Fiducial Marker Tracking</span>
+                    <span class="mode-desc">Detection and localization based on pre-defined ArUco markers.</span>
+                </button>
+
+                <button type="button" onclick="changeMode('markerless', this)">
+                    <span class="mode-label">Algorithm 2: CSRT Kernelized Correlation Tracking</span>
+                    <span class="mode-desc">Robust marker-less tracking using Discriminative Correlation Filter (DCF) techniques.</span>
+                </button>
+
+                <button type="button" onclick="changeMode('sam2', this)">
+                    <span class="mode-label">Algorithm 3: SAM-Based Contour Segmentation & Tracking</span>
+                    <span class="mode-desc">Segmentation-based tracking using pre-computed masks derived from the Segment Anything Model (SAM).</span>
+                </button>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>Georgia State University · Department of Computer Science · Computer Vision Coursework</p>
+        <p>Developed for Assignment 5–6: Object Tracking Framework</p>
+    </footer>
+</div>
+
+<script>
+    function changeMode(modeStr, button) {
+        const labelSpan = button.querySelector('.mode-label');
+        const originalText = labelSpan.textContent;
+
+        labelSpan.textContent = 'Switching...';
+        button.disabled = true;
+
+        const formData = new FormData();
+        formData.append('mode', modeStr);
+
+        fetch('/select_mode', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                labelSpan.textContent = originalText + ' (Active)';
+            } else {
+                console.error('Server failed to change mode:', response.status);
+                labelSpan.textContent = originalText + ' (Error)';
+            }
+            button.disabled = false;
+        })
+        .catch(err => {
+            console.error('Failed to change mode:', err);
+            labelSpan.textContent = originalText + ' (Network Error)';
+            button.disabled = false;
+        });
+    }
+</script>
+</body>
+</html>
